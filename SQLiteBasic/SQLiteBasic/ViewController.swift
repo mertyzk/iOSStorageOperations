@@ -12,6 +12,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dbCopy()
+        
+        //KisilerDao().kisiAdd(kisi_ad: "TestAdd", kisi_yas: 277) // kayıt
+        
+        //KisilerDao().kisiDelete(kisi_id: 2)
+        
+        KisilerDao().kisiUpdate(kisi_id: 3, kisi_ad: "NewName", kisi_yas: 99)
+        
+        
+        var incomingList = KisilerDao().getByAll()
+        
+        for il in incomingList{
+            print("ID: \(il.kisi_id!) - NAME: \(il.kisi_ad!) - AGE: \(il.kisi_yas!)")
+        }
     }
 
     func dbCopy(){
