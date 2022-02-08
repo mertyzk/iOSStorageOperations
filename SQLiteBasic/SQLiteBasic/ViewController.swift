@@ -17,14 +17,31 @@ class ViewController: UIViewController {
         
         //KisilerDao().kisiDelete(kisi_id: 2)
         
-        KisilerDao().kisiUpdate(kisi_id: 3, kisi_ad: "NewName", kisi_yas: 99)
+        //KisilerDao().kisiUpdate(kisi_id: 3, kisi_ad: "NewName", kisi_yas: 99)
         
         
-        var incomingList = KisilerDao().getByAll()
+        //let result = KisilerDao().getByControl(kisi_ad: "TestAdd")
+        //print("\(result) kişi bulundu")
         
-        for il in incomingList{
-            print("ID: \(il.kisi_id!) - NAME: \(il.kisi_ad!) - AGE: \(il.kisi_yas!)")
+        //let incomingList = KisilerDao().getByAll()
+        
+        /*for il in incomingList{
+           print("ID: \(il.kisi_id!) - NAME: \(il.kisi_ad!) - AGE: \(il.kisi_yas!)")
+         }*/
+        
+        /*let result = KisilerDao().getBySearch(kisi_ad: "f")
+        for r in result{
+            print("ID: \(r.kisi_id!) - NAME: \(r.kisi_ad!) - AGE: \(r.kisi_yas!)")
+        }*/
+        
+        //let result = KisilerDao().getById(kisi_id: 1)
+        //print("ID: \(result.kisi_id!) - NAME: \(result.kisi_ad!) - AGE: \(result.kisi_yas!)")
+        
+        let result = KisilerDao().getByRandom()
+        for r in result{
+            print("ID: \(r.kisi_id!) - NAME: \(r.kisi_ad!) - AGE: \(r.kisi_yas!)")
         }
+        
     }
 
     func dbCopy(){

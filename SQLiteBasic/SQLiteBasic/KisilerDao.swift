@@ -67,5 +67,84 @@ class KisilerDao{
         return list
     }
     
+    func getByControl(kisi_ad:String) -> Int{
+        var total = 0
+        db?.open()
+        
+        do {
+            let result = try db!.executeQuery("SELECT COUNT(*) AS result FROM kisiler WHERE kisi_ad = ?", values: [kisi_ad])
+            while result.next() {
+                total = Int(result.string(forColumn:"result"))!
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+        db?.close()
+        
+        return total
+    }
+    
+    func getBySearch(kisi_ad:String) -> [Kisiler]{
+        var list = [Kisiler]()
+        db?.open()
+        
+        do {
+            let result = try db!.executeQuery("SELECT * FROM kisiler WHERE kisi_ad like '%\(kisi_ad)%'", values: nil)
+            while result.next() {
+                let kisi = Kisiler(kisi_id: Int(result.string(forColumn: "kisi_id"))!
+                    , kisi_ad: result.string(forColumn: "kisi_ad")!
+                    , kisi_yas: Int(result.string(forColumn: "kisi_yas"))!)
+                
+                list.append(kisi)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+        db?.close()
+        
+        return list
+    }
+    
+    func getById(kisi_id:Int) -> Kisiler{
+        var list = Kisiler()
+        db?.open()
+        
+        do {
+            let result = try db!.executeQuery("SELECT * FROM kisiler WHERE kisi_id = ?", values: [kisi_id])
+            while result.next() {
+                list = Kisiler(kisi_id: Int(result.string(forColumn: "kisi_id"))!
+                    , kisi_ad: result.string(forColumn: "kisi_ad")!
+                    , kisi_yas: Int(result.string(forColumn: "kisi_yas"))!)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+        db?.close()
+        
+        return list
+    }
+    
+    func getByRandom() -> [Kisiler]{
+        var list = [Kisiler]()
+        db?.open()
+        
+        do {
+            let result = try db!.executeQuery("SELECT * FROM kisiler ORDER BY RANDOM() LIMIT 1", values: nil)
+            while result.next() {
+                let kisi = Kisiler(kisi_id: Int(result.string(forColumn: "kisi_id"))!
+                    , kisi_ad: result.string(forColumn: "kisi_ad")!
+                    , kisi_yas: Int(result.string(forColumn: "kisi_yas"))!)
+                
+                list.append(kisi)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+        db?.close()
+        
+        return list
+    }
+    
+    
     
 }
